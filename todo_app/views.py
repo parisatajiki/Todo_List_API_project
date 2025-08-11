@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+from rest_framework.pagination import PageNumberPagination
 from todo_app.models import Todo
 from todo_app.serializer import TodoSerializer
 
@@ -26,7 +26,9 @@ class TodoList(APIView):
     def get(self, request):
         if request.user.is_authenticated:
             todos = Todo.objects.filter(user=request.user)
-            serializer = TodoSerializer(todos, many=True)
+            paginator = PageNumberPagination()
+            result = paginator.paginate_queryset(queryset=todos,request=request)
+            serializer = TodoSerializer(instance=result, many=True)
             return Response(serializer.data)
         return Response({'user': 'first login'}, status=status.HTTP_400_BAD_REQUEST)
 
