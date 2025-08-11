@@ -21,8 +21,8 @@ https://roadmap.sh/projects/todo-list-api
 
  Setup
 
-git clone https://github.com/yourusername/todo-list-api.git
-cd todo-list-api
+1.git clone https://github.com/yourusername/todo-list-api.git
+2.cd todo-list-api
 source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
 pip install -r requirements.txt
